@@ -1,5 +1,6 @@
 package fr.marseille.businessmanagement.dao;
 
+import fr.marseille.businessmanagement.dao.impl.ClientJPADAO;
 import fr.marseille.businessmanagement.dao.impl.LanguageJPADAO;
 import fr.marseille.businessmanagement.dao.impl.PermissionJPADAO;
 import fr.marseille.businessmanagement.dao.impl.PermissionLabelJPADAO;
@@ -13,6 +14,9 @@ import fr.marseille.businessmanagement.dao.impl.UserJPADAO;
  * A factory for creating DAO objects.
  */
 public class DAOFactory {
+
+    /** The Client **/
+    private static ClientDAO            client;
 
     /** The user. */
     private static UserDAO              user;
@@ -34,6 +38,19 @@ public class DAOFactory {
 
     /** The profile permission. */
     private static ProfilePermissionDAO profilePermission;
+
+    /**
+     * Gets the client dao.
+     *
+     * @return the client dao
+     */
+    public static ClientDAO getClientDAO() {
+        if (null == client) {
+            client = new ClientJPADAO();
+        }
+
+        return client;
+    }
 
     /**
      * Gets the user dao.

@@ -6,6 +6,23 @@
 
 	<navigation-rule>
 		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>clientIndex</from-outcome>
+			<to-view-id>/clientIndex.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>clientCreate</from-outcome>
+			<to-view-id>/clientCreate.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>clientUpdate</from-outcome>
+			<to-view-id>/clientUpdate.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
 		<!-- Soraya -->
 		<navigation-case>
 			<from-outcome>profileUpdate</from-outcome>

@@ -2,6 +2,10 @@ package fr.marseille.businessmanagement.util.constants;
 
 public final class Url {
 
+    public static final String CLIENT_INDEX        = "clientIndex.jsf";
+    public static final String CLIENT_CREATE       = "clientCreate.jsf";
+    public static final String CLIENT_UPDATE       = "clientUpdate.jsf";
+
     public static final String PROFILE_INDEX       = "profileIndex.jsf";
     public static final String PROFILE_CREATE      = "profileCreate.jsf";
     public static final String PROFILE_UDPATE      = "profileUpdate.jsf";

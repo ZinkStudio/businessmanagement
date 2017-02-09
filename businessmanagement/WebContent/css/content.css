@@ -1,7 +1,11 @@
 body {
 	background-color: #EAF0F2;
+	font-size: 0.8em;
 }
-
+.femme {
+	background-color : #FFC4F5;
+	/*background-color : #F2C2F9;*/
+}
 .breadCrumb {
 	padding: 24px 0;
 }
