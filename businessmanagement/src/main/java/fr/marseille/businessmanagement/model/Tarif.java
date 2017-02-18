@@ -22,6 +22,8 @@ public class Tarif implements Serializable {
 
     private Double            prixUnitaire;
 
+    private Boolean           estActif;
+
     public Tarif() {
 
     }

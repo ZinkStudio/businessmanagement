@@ -1,4 +1,4 @@
-<ui:composition template="index.xhtml"
+<ui:composition template="bootstrap.xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:c="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
@@ -67,7 +67,7 @@
 					
 					<p:commandButton id="buttonSavoirPlus2" icon=" fa fa-eye"
 						title="#{msg['client.index.datatable.header.savoirplus']}"
-						style="display:block;margin:0 auto;"
+						styleClass="commandButton"
 						update=":UserForm:clientDetail"
 						oncomplete="PF('clientDetail').show()">
 						<c:setPropertyActionListener value="#{client}"
@@ -81,7 +81,7 @@
 					<p:commandButton id="buttonAllProfiles" action="userProfiles"
 						icon=" fa fa-eye"
 						title="#{msg['user.index.datatable.command.profiles']}"
-						style="display:block;margin:0 auto;">
+						styleClass="commandButton">
 						<c:setPropertyActionListener value="#{user}"
 							target="#{userView.user}" />
 					</p:commandButton>

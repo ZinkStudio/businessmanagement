@@ -7,6 +7,17 @@
 	<navigation-rule>
 		<from-view-id>*</from-view-id>
 		<navigation-case>
+			<from-outcome>bootstrap</from-outcome>
+			<to-view-id>/bootstrap.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>elateIndex</from-outcome>
+			<to-view-id>/elateIndex.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
 			<from-outcome>clientIndex</from-outcome>
 			<to-view-id>/clientIndex.xhtml</to-view-id>
 			<redirect />

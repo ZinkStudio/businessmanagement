@@ -1,0 +1,11 @@
+<ui:composition xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	<h:form>
+		<p:selectOneMenu value="#{localeView.language}" onchange="submit()">
+			<c:selectItem itemValue="en" itemLabel="English" />
+			<c:selectItem itemValue="fr" itemLabel="Français" />
+		</p:selectOneMenu>
+	</h:form>
+</ui:composition>
