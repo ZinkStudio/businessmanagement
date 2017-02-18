@@ -1,6 +1,7 @@
 package fr.marseille.businessmanagement.model;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -24,6 +25,9 @@ public class Client implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer           id;
 
+    private Boolean           estMasque;
+    private Boolean           autoriseNewsletter;
+
     private String            nom;
     private String            prenom;
 
@@ -33,11 +37,16 @@ public class Client implements Serializable {
     @Enumerated(EnumType.STRING)
     private Civilite          civilite;
 
+    private Date              naissance;
+
     private String            fixe;
 
     private String            mobile;
 
     private String            email;
+
+    private String            adresse;
+    private String            adresseComplement;
 
     private String            ville;
 
@@ -219,6 +228,54 @@ public class Client implements Serializable {
      */
     public void setCommentaire(String commentaire) {
         this.commentaire = commentaire;
+    }
+
+    public Date getNaissance() {
+        return naissance;
+    }
+
+    public void setNaissance(Date naissance) {
+        this.naissance = naissance;
+    }
+
+    public Boolean getEstMasque() {
+        return estMasque;
+    }
+
+    public void setEstMasque(Boolean estMasque) {
+        this.estMasque = estMasque;
+    }
+
+    public String getAdresse() {
+        return adresse;
+    }
+
+    public void setAdresse(String adresse) {
+        this.adresse = adresse;
+    }
+
+    public String getAdresseComplement() {
+        return adresseComplement;
+    }
+
+    public void setAdresseComplement(String adresseComplement) {
+        this.adresseComplement = adresseComplement;
+    }
+
+    public Boolean getAutoriseNewsletter() {
+        return autoriseNewsletter;
+    }
+
+    public void setAutoriseNewsletter(Boolean autoriseNewsletter) {
+        this.autoriseNewsletter = autoriseNewsletter;
+    }
+
+    public List<Facture> getFactures() {
+        return factures;
+    }
+
+    public void setFactures(List<Facture> factures) {
+        this.factures = factures;
     }
 
 }

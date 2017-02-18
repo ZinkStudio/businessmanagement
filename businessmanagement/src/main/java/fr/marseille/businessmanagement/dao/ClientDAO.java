@@ -10,6 +10,14 @@ import fr.marseille.businessmanagement.model.Client;
  */
 public interface ClientDAO {
 
+    public void refuseNewsletter(Client client) throws DAOException;
+    
+    public void autoriseNewsletter(Client client) throws DAOException;
+    
+    public void mask(Client client) throws DAOException;
+    
+    public void mask(List<Client> clients) throws DAOException;
+    
     /**
      * Save.
      *

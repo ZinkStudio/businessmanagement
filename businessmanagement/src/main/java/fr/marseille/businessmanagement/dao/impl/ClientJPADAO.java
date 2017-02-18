@@ -120,4 +120,31 @@ public class ClientJPADAO implements ClientDAO {
         }
         return true;
     }
+
+    @Override
+    public void mask(Client client) throws DAOException {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void mask(List<Client> clients) throws DAOException {
+        for (Client client : clients) {
+            this.mask(client);
+        }
+
+    }
+
+    @Override
+    public void autoriseNewsletter(Client client) throws DAOException {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void refuseNewsletter(Client client) throws DAOException {
+        // TODO Auto-generated method stub
+
+    }
+
 }
