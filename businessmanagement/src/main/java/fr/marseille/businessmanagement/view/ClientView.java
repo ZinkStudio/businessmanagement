@@ -3,6 +3,7 @@ package fr.marseille.businessmanagement.view;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -23,10 +24,13 @@ public class ClientView extends BaseView implements Serializable {
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 1L;
 
-    /** The users. */
+    /** The clients. */
     private List<Client>      clients;
-
-    /** The user. */
+    
+    /** The filtre clients. */
+    private List<Client>      filtreClients;
+    
+    /** The Client. */
     private Client            client;
 
     /** The ClientService **/
@@ -76,6 +80,22 @@ public class ClientView extends BaseView implements Serializable {
 
     }
 
+    public boolean filtreNom(Object value, Object filter, Locale locale) {
+        return this.filterByValue(value, filter, locale);
+    }
+    public boolean filtrePrenom(Object value, Object filter, Locale locale) {
+        return this.filterByValue(value, filter, locale);
+    }
+    public boolean filtreVille(Object value, Object filter, Locale locale) {
+        return this.filterByValue(value, filter, locale);
+    }
+    public boolean filtreCodePostal(Object value, Object filter, Locale locale) {
+        return this.filterByValue(value, filter, locale);
+    }
+    public boolean filtreCommentaire(Object value, Object filter, Locale locale) {
+        return this.filterByValue(value, filter, locale);
+    }
+    
     /**
      * Gets the clients.
      *
@@ -94,6 +114,14 @@ public class ClientView extends BaseView implements Serializable {
      */
     public void setClients(List<Client> clients) {
         this.clients = clients;
+    }
+    
+    public List<Client> getFiltreClients() {
+        return filtreClients;
+    }
+
+    public void setFiltreClients(List<Client> filtreClients) {
+        this.filtreClients = filtreClients;
     }
 
     /**

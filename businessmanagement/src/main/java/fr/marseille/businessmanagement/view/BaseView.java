@@ -2,6 +2,7 @@ package fr.marseille.businessmanagement.view;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.Locale;
 import java.util.ResourceBundle;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -13,6 +14,19 @@ public abstract class BaseView implements Serializable {
      * 
      */
     private static final long serialVersionUID = 1L;
+
+    protected boolean filterByValue(Object value, Object filter, Locale locale) {
+        String filterText = (filter == null) ? null : filter.toString().trim();
+        if (filterText == null || filterText.equals("")) {
+            return true;
+        }
+
+        if (value == null) {
+            return false;
+        }
+
+        return ((Comparable) value).compareTo(Integer.valueOf(filterText)) > 0;
+    }
 
     protected String getBundleValue(String key) {
         FacesContext context = FacesContext.getCurrentInstance();
