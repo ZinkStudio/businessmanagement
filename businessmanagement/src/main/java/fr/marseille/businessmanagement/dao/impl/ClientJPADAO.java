@@ -2,6 +2,7 @@ package fr.marseille.businessmanagement.dao.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.EntityManager;
 import org.apache.log4j.Logger;
 import fr.marseille.businessmanagement.dao.ClientDAO;
 import fr.marseille.businessmanagement.exception.DAOException;
@@ -15,7 +16,8 @@ import fr.marseille.businessmanagement.util.JPAUtil;
 public class ClientJPADAO implements ClientDAO {
 
     /** The Constant LOG. */
-    private static final Logger LOG = Logger.getLogger(ClientJPADAO.class);
+    private static final Logger LOG           = Logger.getLogger(ClientJPADAO.class);
+    protected EntityManager     entityManager = JPAUtil.getEntityManager();
 
     /**
      * Default constructor.
@@ -31,7 +33,7 @@ public class ClientJPADAO implements ClientDAO {
     public boolean save(Client client) throws DAOException {
         try {
             JPAUtil.beginTransaction();
-            JPAUtil.getEntityManager().persist(client);
+            entityManager.persist(client);
             JPAUtil.commitTransaction();
         } catch (RuntimeException e) {
             String msg = "save : " + e.getMessage();
@@ -50,7 +52,7 @@ public class ClientJPADAO implements ClientDAO {
     public List<Client> findAll() throws DAOException {
         List<Client> clients = new ArrayList<>();
         try {
-            clients = (List<Client>) JPAUtil.getEntityManager().createQuery("from Client").getResultList();
+            clients = (List<Client>) entityManager.createQuery("from Client").getResultList();
         } catch (RuntimeException e) {
             String msg = "findAll : " + e.getMessage();
             LOG.warn(msg);
@@ -68,7 +70,7 @@ public class ClientJPADAO implements ClientDAO {
     public Client find(Integer id) throws DAOException {
         Client client = null;
         try {
-            client = JPAUtil.getEntityManager().find(Client.class, id);
+            client = entityManager.find(Client.class, id);
         } catch (RuntimeException e) {
             String msg = "find : " + e.getMessage();
             LOG.warn(msg);
@@ -87,7 +89,7 @@ public class ClientJPADAO implements ClientDAO {
     public Client update(Client client) throws DAOException {
         try {
             JPAUtil.beginTransaction();
-            JPAUtil.getEntityManager().merge(client);
+            entityManager.merge(client);
             JPAUtil.commitTransaction();
         } catch (RuntimeException e) {
             String msg = "update : " + e.getMessage();
@@ -109,7 +111,7 @@ public class ClientJPADAO implements ClientDAO {
         if (null != client) {
             try {
                 JPAUtil.beginTransaction();
-                JPAUtil.getEntityManager().remove(client);
+                entityManager.remove(client);
                 JPAUtil.commitTransaction();
             } catch (RuntimeException e) {
                 String msg = "remove : " + e.getMessage();

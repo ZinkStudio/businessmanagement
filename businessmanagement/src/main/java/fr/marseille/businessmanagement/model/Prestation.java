@@ -26,8 +26,8 @@ public class Prestation implements Serializable {
 
     private Double            prixUnitaire;
 
-    @ManyToMany(mappedBy = "prestations")
-    private List<Facture>     factures;
+//    @ManyToMany(mappedBy = "prestations")
+//    private List<Facture>     factures;
 
     public Prestation() {
 

@@ -2,7 +2,12 @@ package fr.marseille.businessmanagement.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import javax.persistence.CollectionTable;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -11,6 +16,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapKeyJoinColumn;
 import fr.marseille.businessmanagement.enumerated.MoyenPaiement;
 
 /**
@@ -19,32 +25,36 @@ import fr.marseille.businessmanagement.enumerated.MoyenPaiement;
 @Entity
 public class Facture implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    private static final long       serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer           id;
+    private Integer                 id;
 
-    private Date              date;
+    private Date                    date;
 
     @ManyToOne
-    private Client            client;
+    private Client                  client;
 
-    @ManyToMany
-    private List<Prestation>  prestations;
+    @ElementCollection
+    @CollectionTable(name = "facture_prestation")
+    @MapKeyJoinColumn(name = "prestations_id")
+    @Column(name = "quantite")
+    private Map<Prestation, Double> prestations;
 
     @Enumerated(EnumType.STRING)
-    private MoyenPaiement     moyenPaiement;
+    private MoyenPaiement           moyenPaiement;
 
-    private Boolean           estDevis;
+    private Boolean                 estDevis;
 
-    private Boolean           estReglee;
+    private Boolean                 estReglee;
 
     public Facture() {
-
+        prestations = new HashMap<Prestation, Double>();
     }
 
     public Facture(Integer id, Client client, Date date, Boolean estDevis, Boolean estReglee) {
+        this();
         this.id = id;
         this.date = date;
         this.client = client;
@@ -125,6 +135,22 @@ public class Facture implements Serializable {
      */
     public void setMoyenPaiement(MoyenPaiement moyenPaiement) {
         this.moyenPaiement = moyenPaiement;
+    }
+
+    public Map<Prestation, Double> getPrestations() {
+        return prestations;
+    }
+
+    public void setPrestations(Map<Prestation, Double> prestations) {
+        this.prestations = prestations;
+    }
+
+    public void addPrestation(Prestation prestation, Double quantite) {
+        this.prestations.put(prestation, quantite);
+    }
+
+    public void removePrestation(Prestation prestation) {
+        this.prestations.remove(prestation);
     }
 
 }
