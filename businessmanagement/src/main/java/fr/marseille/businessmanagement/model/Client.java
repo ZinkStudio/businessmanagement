@@ -28,6 +28,7 @@ public class Client implements Serializable {
     private Boolean           estMasque;
     private Boolean           autoriseNewsletter;
 
+    private String            code;
     private String            nom;
     private String            prenom;
 
@@ -276,6 +277,14 @@ public class Client implements Serializable {
 
     public void setFactures(List<Facture> factures) {
         this.factures = factures;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 
 }

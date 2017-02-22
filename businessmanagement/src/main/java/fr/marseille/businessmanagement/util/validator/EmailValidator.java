@@ -1,5 +1,6 @@
 package fr.marseille.businessmanagement.util.validator;
 
+import java.util.regex.Pattern;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -11,8 +12,16 @@ import javax.faces.validator.ValidatorException;
 /**
  * The Class NoWhiteSpaceValidator.
  */
-@FacesValidator("noWhiteSpaceValidator")
-public class NoWhiteSpaceValidator implements Validator {
+@FacesValidator("emailValidator")
+public class EmailValidator implements Validator {
+
+    private Pattern             pattern;
+    private static final String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+            + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+
+    public EmailValidator() {
+        pattern = Pattern.compile(EMAIL_PATTERN);
+    }
 
     /*
      * (non-Javadoc)
@@ -21,15 +30,13 @@ public class NoWhiteSpaceValidator implements Validator {
      */
     @Override
     public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException {
-
-        if (value.toString().trim().isEmpty()) {
-            FacesMessage msg = new FacesMessage("Incorrect input provided",
-                    "The input can't be empty or can't contain only whitespace");
-            msg.setSeverity(FacesMessage.SEVERITY_ERROR);
-            throw new ValidatorException(msg);
+        
+        if (value == null) {
+            return;
         }
-        if (value.toString().contains(" ")) {
-            FacesMessage msg = new FacesMessage("Incorrect input provided", "This whitespace is forbidden");
+
+        if (!pattern.matcher(value.toString()).matches()) {
+            FacesMessage msg = new FacesMessage("Incorrect input provided", "Email invalide");
             msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             throw new ValidatorException(msg);
         }

@@ -18,6 +18,12 @@ public interface ClientDAO {
     
     public void mask(List<Client> clients) throws DAOException;
     
+    public String assignerCode() throws DAOException;
+    
+    public Boolean verifierCode(String code) throws DAOException;
+    
+    public String genererCode() throws DAOException;
+    
     /**
      * Save.
      *

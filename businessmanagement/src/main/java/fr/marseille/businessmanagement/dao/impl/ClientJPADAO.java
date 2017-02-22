@@ -2,6 +2,7 @@ package fr.marseille.businessmanagement.dao.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import javax.persistence.EntityManager;
 import org.apache.log4j.Logger;
 import fr.marseille.businessmanagement.dao.ClientDAO;
@@ -147,6 +148,37 @@ public class ClientJPADAO implements ClientDAO {
     public void refuseNewsletter(Client client) throws DAOException {
         // TODO Auto-generated method stub
 
+    }
+
+    @Override
+    public String assignerCode() throws DAOException {
+        Boolean codeDisponible = false;
+        String codeGenere = "";
+        
+        do {
+            codeGenere = this.genererCode();
+            codeDisponible = this.verifierCode(codeGenere);                    
+        } while (!codeDisponible);
+        
+        return codeGenere;
+    }
+
+    @Override
+    public Boolean verifierCode(String code) throws DAOException {
+        return !this.findAll().stream().anyMatch(c->c.getCode().equals(code));
+    }
+
+    @Override
+    public String genererCode() throws DAOException {
+        Random aleatoire = new Random();
+        StringBuilder code = new StringBuilder();
+
+        code.append(aleatoire.ints(10, 100).findFirst().getAsInt());
+        code.append((char) aleatoire.ints(65, 91).findFirst().getAsInt());
+        code.append((char) aleatoire.ints(65, 91).findFirst().getAsInt());
+        code.append(aleatoire.ints(10, 100).findFirst().getAsInt());
+
+        return code.toString();
     }
 
 }

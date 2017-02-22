@@ -11,7 +11,7 @@ import javax.faces.validator.ValidatorException;
 /**
  * The Class NoSeparatorValidator.
  */
-@FacesValidator
+@FacesValidator("noSeparatorValidator")
 public class NoSeparatorValidator implements Validator {
 
     /* (non-Javadoc)

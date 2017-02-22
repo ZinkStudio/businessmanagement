@@ -8,12 +8,14 @@
 		<h:outputText value="#{msg['client.index.html.title']}" />
 	</ui:define>
 
-	<ui:define name="headerTitle">
-		<h:outputText id="layoutTitle" value="#{msg['client.layout.title']}" />
+	<ui:define name="heading1">
+		<h:outputText id="heading1" value="#{msg['client.index.heading']}" />
+	</ui:define>
+
+	<ui:define name="breadcrumb">
 	</ui:define>
 
 	<ui:define name="content">
-
 		<div style="width: 100%; height: 50px;">
 			<p:commandButton style="float:right;"
 				value="#{msg['client.index.command.create']}" icon="ui-icon-star"
@@ -37,9 +39,8 @@
 				<c:facet name="header">
 					<h:outputText id="headerDataTable"
 						value="#{msg['client.index.datatable.header']} : " />
-						<p:inputText id="gloablFilter"
-							onkeyup="PF('clientTable').filter()"
-							placeholder="#{msg['client.index.datatable.filter.footerText']}" />
+					<p:inputText id="gloablFilter" onkeyup="PF('clientTable').filter()"
+						placeholder="#{msg['client.index.datatable.filter.footerText']}" />
 				</c:facet>
 
 				<p:column headerText="#{msg['client.index.datatable.header.id']}"

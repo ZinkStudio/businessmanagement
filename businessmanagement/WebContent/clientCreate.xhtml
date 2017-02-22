@@ -1,0 +1,122 @@
+<ui:composition template="index.xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="title">
+		<h:outputText value="#{msg['client.create.html.title']}" />
+	</ui:define>
+
+	<ui:define name="heading1">
+		<h:outputText id="heading1" value="#{msg['client.create.heading']}" />
+	</ui:define>
+
+	<ui:define name="breadcrumb">
+		<p:menuitem outcome="clientIndex.jsf"
+			value="#{msg['breadcrumb.client.index']}" />
+	</ui:define>
+
+	<ui:define name="content">
+		<h:form id="formClientCreate" styleClass="form-horizontal">
+			<p:panel id="formPanel" header="#{msg['client.label.legend']}">
+
+<!-- 				<p:messages id="messages" showDetail="true" /> -->
+
+				<h:panelGrid columns="3" cellpadding="5" styleClass="padding5">
+
+					<p:outputLabel for="nom" value="#{msg['client.label.nom']}" />
+					<p:inputText id="nom" value="#{clientSaveView.client.nom}"
+						required="true">
+						<c:validator validatorId="noWhiteSpaceValidator" />
+					</p:inputText>
+					<p:message for="nom" />
+
+					<p:outputLabel for="prenom" value="#{msg['client.label.prenom']}" />
+					<p:inputText id="prenom" value="#{clientSaveView.client.prenom}"
+						required="true">
+						<c:validator validatorId="noWhiteSpaceValidator" />
+					</p:inputText>
+					<p:message for="prenom" />
+
+					<p:outputLabel for="civilite"
+						value="#{msg['client.label.civilite']}" />
+					<p:inputText id="civilite"
+						value="#{clientSaveView.client.civilite}" required="true">
+						<c:validator validatorId="noWhiteSpaceValidator" />
+					</p:inputText>
+					<p:message for="civilite" />
+
+					<p:outputLabel for="email" value="#{msg['client.label.email']}" />
+					<p:inputText id="email" value="#{clientSaveView.client.email}"
+						required="true">
+						<c:validator validatorId="emailValidator" />
+					</p:inputText>
+					<p:message for="email" />
+
+					<p:outputLabel for="fixe" value="#{msg['client.label.fixe']}" />
+					<p:inputText id="fixe" value="#{clientSaveView.client.fixe}"
+						required="true">
+						<c:validator validatorId="noWhiteSpaceValidator" />
+					</p:inputText>
+					<p:message for="fixe" />
+
+					<p:outputLabel for="mobile" value="#{msg['client.label.mobile']}" />
+					<p:inputText id="mobile" value="#{clientSaveView.client.mobile}"
+						required="true">
+						<c:validator validatorId="noWhiteSpaceValidator" />
+					</p:inputText>
+					<p:message for="mobile" />
+
+					<p:outputLabel for="adresse" value="#{msg['client.label.adresse']}" />
+					<p:inputText id="adresse" value="#{clientSaveView.client.adresse}"
+						required="true">
+						<c:validator validatorId="noWhiteSpaceValidator" />
+					</p:inputText>
+					<p:message for="adresse" />
+
+					<p:outputLabel for="adresseComplement"
+						value="#{msg['client.label.complement']}" />
+					<p:inputText id="adresseComplement"
+						value="#{clientSaveView.client.adresseComplement}" required="true">
+						<c:validator validatorId="noWhiteSpaceValidator" />
+					</p:inputText>
+					<p:message for="adresseComplement" />
+
+					<p:outputLabel for="codePostal"
+						value="#{msg['client.label.codePostal']}" />
+					<p:inputText id="codePostal"
+						value="#{clientSaveView.client.codePostal}" required="true">
+						<c:validator validatorId="noWhiteSpaceValidator" />
+					</p:inputText>
+					<p:message for="codePostal" />
+
+					<p:outputLabel for="ville" value="#{msg['client.label.ville']}" />
+					<p:inputText id="ville" value="#{clientSaveView.client.ville}"
+						required="true">
+						<c:validator validatorId="noWhiteSpaceValidator" />
+					</p:inputText>
+					<p:message for="ville" />
+
+					<p:outputLabel for="commentaire"
+						value="#{msg['client.label.commentaire']}" />
+					<p:inputText id="commentaire"
+						value="#{clientSaveView.client.commentaire}" required="true">
+						<c:validator validatorId="noWhiteSpaceValidator" />
+					</p:inputText>
+					<p:message for="commentaire" />
+
+				</h:panelGrid>
+
+				<p:commandButton id="cmd-flash" value="Save"
+					update="formClientCreate" action="#{clientSaveView.save}"
+					style="margin:1em;">
+					<c:setPropertyActionListener value="#{clientSaveView.client}"
+						target="#{clientSaveView.client}" />
+				</p:commandButton>
+
+			</p:panel>
+		</h:form>
+
+	</ui:define>
+</ui:composition>

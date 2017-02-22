@@ -17,7 +17,7 @@ import fr.marseille.businessmanagement.model.Language;
 /**
  * The Class CheckDefaultLanguage.
  */
-@FacesValidator
+@FacesValidator("checkDefaultLanguage")
 public class CheckDefaultLanguage implements Validator {
 
     /** The language dao. */

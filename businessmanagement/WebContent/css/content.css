@@ -1,3 +1,11 @@
+.navbar-fixed-top {
+/*	background-color:blue;*/
+/* change to blue */
+}
+.padding5 {
+	border-collapse: separate;	
+    border-spacing: 5px 5px;
+}
 .femme {
 	background-color: rgba(255, 196, 245, 0.35);
 	/*background-color : #FFC4F5;*/
