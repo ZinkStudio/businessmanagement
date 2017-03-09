@@ -1,0 +1,45 @@
+<ui:composition template="./WEB-INF/layout/index.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:c="http://xmlns.jcp.org/jsf/core"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="title">
+        <h:outputText value="#{msg['label.title1']}" />
+    </ui:define>
+    <ui:define name="headerTitle">
+        <h:outputText id="layoutTitle" value="#{msg['label.layout1']}" />
+    </ui:define>
+    <ui:define name="content">
+        <c:loadBundle var="msg" basename="messages" />
+        <h:form id="userRecover">
+            <p:panel id="panel" header="#{msg['label.header1']}"
+                     style="margin-bottom:30px;font-size:20px;">
+                <p:messages id="messages" />
+
+                <h:panelGrid columns="6" cellpadding="10">
+                    <p:outputLabel for="name" value="#{msg['label.name']} :" />
+                    <h:outputText id="name"
+                                  value="#{userProfilesView.userView.user.name}" />
+                    <p:message for="name" />
+                    <p:outputLabel for="firstName" value="#{msg['label.firstname']} :" />
+                    <h:outputText id="firstName"
+                                  value="#{userProfilesView.userView.user.firstName}" />
+                    <p:message for="firstName" />
+                </h:panelGrid>
+            </p:panel>
+        </h:form>
+
+        <h:form style="margin-left:400px;margin-right:400px">
+            <br />
+            <p:pickList id="pickList" value="#{userProfilesView.profiles}"
+                        var="profiles" itemLabel="#{profiles}" itemValue="#{profiles}" />
+            <p:commandButton id="cmd-flash"
+                             actionListener="#{userProfilesView.update}"
+                             value="#{msg['btn.save']}" title="#{msg['lbl.btn.save']}"
+                             style="margin-top:5px">
+            </p:commandButton>
+        </h:form>
+
+    </ui:define>
+</ui:composition>

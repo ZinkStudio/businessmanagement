@@ -1,0 +1,211 @@
+<ui:composition
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:c="http://xmlns.jcp.org/jsf/core"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    template="./WEB-INF/layout/template.xhtml">
+
+    <ui:define name="title">#{msg['client.index.html.title']}</ui:define>
+
+    <ui:define name="heading1">
+        <h:outputText id="heading1" value="#{msg['client.index.heading']}" />
+    </ui:define>
+
+    <ui:define name="breadcrumb" />
+
+    <ui:define name="content">
+        <div style="width: 100%; height: 50px;">
+            <p:commandButton
+                style="float:right;"
+                value="#{msg['client.index.command.create']}" icon="ui-icon-star"
+                title="#{msg['client.index.command.create.title']}"
+                action="clientCreate">
+            </p:commandButton>
+        </div>
+
+        <h:form id="ClientForm" style="margin-top:20px;">
+
+            <p:messages id="messages" />
+
+            <p:dataTable
+                id="refreshClients"
+                value="#{clientView.clients}"
+                filteredValue="#{clientView.filtreClients}"
+                var="client"
+                widgetVar="clientsTable"
+                rowStyleClass="#{client.civilite.styleClass}"
+                emptyMessage="#{msg['client.index.datatable.filter.emptyMessage']}"
+                paginator="true"
+                rows="10"
+                rowsPerPageTemplate="5,10,15"
+                paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} ">
+
+                <!-- todo: onchange property on every input -->
+                <c:facet name="header">
+                    <h:outputText
+                        id="headerDataTable"
+                        value="#{msg['client.index.datatable.header']} : " />
+                    <p:inputText
+                        id="globalFilter"
+                        onkeyup="PF('clientsTable').filter()"
+                        placeholder="#{msg['client.index.datatable.filter.footerText']}" />
+                </c:facet>
+
+                <p:column
+                    headerText="#{msg['client.index.datatable.header.code']}"
+                    filterBy="#{client.code}" filterStyle="display:none"
+                    filterMatchMode="contains" width="30">
+                    #{client.code}
+                </p:column>
+                <p:column
+                    headerText="#{msg['client.index.datatable.header.nom']}"
+                    filterBy="#{client.nom}" filterStyle="display:none"
+                    filterMatchMode="contains" width="60">
+                    #{client.nom}
+                </p:column>
+                <p:column
+                    headerText="#{msg['client.index.datatable.header.prenom']}"
+                    filterBy="#{client.prenom}"
+                    filterStyle="display:none"
+                    filterMatchMode="contains"
+                    width="60">
+                    #{client.prenom}
+                </p:column>
+                <p:column
+                    headerText="#{msg['client.index.datatable.header.commune']}"
+                    filterBy="#{client.adresse.commune}"
+                    filterStyle="display:none"
+                    filterMatchMode="contains" width="60">
+                    #{client.adresse.commune}
+                </p:column>
+
+                <p:column
+                    headerText="#{msg['client.index.datatable.header.savoirplus']}"
+                    width="30">
+
+                    <p:commandButton
+                        id="buttonSavoirPlus2"
+                        icon=" fa fa-eye"
+                        title="#{msg['client.index.datatable.header.savoirplus']}"
+                        styleClass="commandButton"
+                        update=":ClientForm:clientDetail"
+                        oncomplete="PF('clientDetail').show()">
+                        <c:setPropertyActionListener
+                            value="#{client}"
+                            target="#{clientView.client}" />
+                    </p:commandButton>
+                </p:column>
+
+                <p:column
+                    headerText="#{msg['client.index.datatable.header.factures']}"
+                    width="30">
+                    <p:commandButton
+                        id="buttonAllProfiles"
+                        action="clientProfiles"
+                        icon=" fa fa-eye"
+                        title="#{msg['client.index.datatable.command.profiles']}"
+                        styleClass="commandButton">
+                        <c:setPropertyActionListener
+                            value="#{client}"
+                            target="#{clientView.client}" />
+                    </p:commandButton>
+                </p:column>
+
+                <!-- Redirection to clientUpdate -->
+                <p:column
+                    headerText="#{msg['client.index.datatable.header.update']}"
+                    width="30">
+                    <p:commandButton
+                        id="buttonUpdate"
+                        action="clientUpdate"
+                        icon="fa fa-edit"
+                        title="#{msg['client.index.datatable.command.update']}"
+                        styleClass="commandButton">
+                        <c:setPropertyActionListener
+                            value="#{client}"
+                            target="#{clientView.client}" />
+                    </p:commandButton>
+                </p:column>
+
+                <!-- Delete client -->
+                <p:column
+                    headerText="#{msg['client.index.datatable.header.delete']}"
+                    width="30">
+
+                    <p:commandButton
+                        id="buttonDelete" update="@all"
+                        action="#{clientView.delete}" icon="fa fa-remove"
+                        title="#{msg['client.index.datatable.command.delete']}"
+                        styleClass="commandButton">
+                        <c:setPropertyActionListener
+                            value="#{client}"
+                            target="#{clientView.client}" />
+                        <p:confirm
+                            header="Confirmation"
+                            message="#{msg['client.index.datatable.confirmdialog.message']}"
+                            icon="ui-icon-alert" />
+                    </p:commandButton>
+
+                    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                        <p:commandButton
+                            value="#{msg['client.index.datatable.confirmdialog.yes']}"
+                            type="button" styleClass="ui-confirmdialog-yes"
+                            icon="ui-icon-check" />
+                        <p:commandButton
+                            value="#{msg['client.index.datatable.confirmdialog.no']}"
+                            type="button" styleClass="ui-confirmdialog-no"
+                            icon="ui-icon-close" />
+                    </p:confirmDialog>
+                </p:column>
+            </p:dataTable>
+
+            <p:dialog
+                header="Informations Client"
+                widgetVar="clientDetail"
+                minHeight="40"
+                showEffect="blind"
+                hideEffect="explode"
+                resizable="false">
+                <p:panelGrid id="clientDetail" columns="2">
+                    <c:facet name="header">
+                        <p:graphicImage
+                            name="images/avatar_#{clientView.client.civilite}.png" />
+                    </c:facet>
+
+                    #{msg['client.index.datatable.header.nom']}
+                    #{clientView.client.nom}
+
+                    #{msg['client.index.datatable.header.prenom']}
+                    #{clientView.client.prenom}
+
+                    #{msg['client.label.civilite']}
+                    #{clientView.client.civilite}
+
+                    #{msg['client.label.adresse']}
+                    #{clientView.client.adresse.libelle}
+
+                    #{msg['client.label.complement']}
+                    #{clientView.client.adresse.complement}
+
+                    #{msg['client.label.commune']}
+                    #{clientView.client.adresse.commune}
+
+                    #{msg['client.label.codePostal']}
+                    #{clientView.client.adresse.codePostal}
+
+                    #{msg['client.label.email']}
+                    #{clientView.client.email}
+
+                    #{msg['client.label.fixe']}
+                    #{clientView.client.fixe}
+
+                    #{msg['client.label.mobile']}
+                    #{clientView.client.mobile}
+
+                    #{msg['client.label.commentaire']}
+                    #{clientView.client.commentaire}
+                </p:panelGrid>
+            </p:dialog>
+        </h:form>
+    </ui:define>
+</ui:composition>

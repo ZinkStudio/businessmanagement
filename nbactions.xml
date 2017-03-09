@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions>
+        <action>
+            <actionName>CUSTOM-tomcat7:deploy</actionName>
+            <displayName>tomcat7:deploy</displayName>
+            <goals>
+                <goal>tomcat7:deploy</goal>
+            </goals>
+        </action>
+        <action>
+            <actionName>CUSTOM-tomcat7:undeploy</actionName>
+            <displayName>tomcat7:undeploy</displayName>
+            <goals>
+                <goal>tomcat7:undeploy</goal>
+            </goals>
+        </action>
+        <action>
+            <actionName>CUSTOM-tomcat7:redeploy</actionName>
+            <displayName>tomcat7:redeploy</displayName>
+            <goals>
+                <goal>tomcat7:redeploy</goal>
+            </goals>
+        </action>
+    </actions>

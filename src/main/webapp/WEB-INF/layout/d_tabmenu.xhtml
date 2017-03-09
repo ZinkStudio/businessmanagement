@@ -1,0 +1,27 @@
+<ui:composition xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:c="http://xmlns.jcp.org/jsf/core"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+    <p:menubar>
+        <p:menuitem value="#{msg['home.navigation.clients']}"
+                    outcome="index" icon="fa fa-user">
+            <c:param name="index" value="0"/>
+        </p:menuitem>
+        <p:menuitem value="#{msg['home.navigation.users']}"
+                    outcome="userIndex" icon="ui-icon-star">
+            <c:param name="index" value="1" />
+        </p:menuitem>
+        <p:menuitem value="#{msg['home.navigation.profiles']}"
+                    outcome="profileIndex" icon="ui-icon-search">
+            <c:param name="index" value="2" />
+        </p:menuitem>
+        <p:menuitem value="#{msg['home.navigation.permissions']}"
+                    outcome="permissionIndex" icon="ui-icon-document">
+            <c:param name="index" value="3" />
+        </p:menuitem>
+        <p:menuitem value="#{msg['home.navigation.languages']}"
+                    outcome="languageIndex" icon="ui-icon-document">
+            <c:param name="index" value="4" />
+        </p:menuitem>
+    </p:menubar>
+</ui:composition>

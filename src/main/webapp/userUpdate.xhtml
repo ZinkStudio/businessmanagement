@@ -1,0 +1,53 @@
+<ui:composition template="./WEB-INF/layout/index.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:c="http://xmlns.jcp.org/jsf/core"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+    <ui:define name="title">
+        <h:outputText value="#{msg['label.title1']}" />
+    </ui:define>
+    <ui:define name="headerTitle">
+        <h:outputText id="layoutTitle" value="#{msg['label.layout1']}" />
+    </ui:define>
+
+    <ui:define name="backLink">
+        <p:menuitem value="List Users" outcome="home" />
+    </ui:define>
+
+    <ui:define name="content">
+        <c:loadBundle var="msg" basename="messages" />
+        <h:form id="formUserUpdate">
+            <p:panel id="panel" header="#{msg['label.header1']}"
+                     style="font-size:20px;margin-bottom:10px;">
+                <p:messages id="messages" />
+                <h:panelGrid columns="3" cellpadding="8">
+                    <p:outputLabel for="name" value="#{msg['label.name']}" />
+                    <p:inputText id="name" value="#{userView.user.name}"
+                                 required="true" label="name">
+                        <c:validateLength minimum="2" />
+                        <c:validator validatorId="noWhiteSpaceValidator" />
+                        <c:validator validatorId="noSeparatorValidator" />
+                    </p:inputText>
+                    <p:message for="name" />
+
+                    <p:outputLabel for="firstName" value="#{msg['label.firstname']}" />
+                    <p:inputText id="firstName"
+                                 value="#{userView.user.firstName}" required="true"
+                                 label="firstName">
+                        <c:validator validatorId="noWhiteSpaceValidator" />
+                        <c:validator validatorId="noSeparatorValidator" />
+                    </p:inputText>
+                    <p:message for="firstName" />
+
+                    <p:outputLabel for="comment" value="#{msg['label.comment']}" />
+                    <p:inputText id="comment" value="#{userView.user.comment}"
+                                 required="false" label="comment" />
+                    <p:message for="comment" />
+                </h:panelGrid>
+            </p:panel>
+            <p:commandButton value="#{msg['btn.update']}" update="panel"
+                             actionListener="#{userView.update}" style="margin-right:20px;"
+                             title="#{msg['lbl.btn.update']}" />
+        </h:form>
+    </ui:define>
+</ui:composition>
